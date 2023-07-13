@@ -1,0 +1,37 @@
+##
+## GEMMA Version    = 0.98.5 (2021-08-25)
+## Build profile    = /gnu/store/8rvid272yb53bgascf5c468z0jhsyflj-profile
+## GCC version      = 7.5.0
+## GSL Version      = 2.6
+## OpenBlas         = OpenBLAS 0.3.9  - OpenBLAS 0.3.9 DYNAMIC_ARCH NO_AFFINITY SkylakeX MAX_THREADS=128
+##   arch           = SkylakeX
+##   threads        = 1
+##   parallel type  = threaded
+##
+## Command Line Input = gemma -g /projects/kumar-lab/sabnig/GWAS/geno_vame_12k_2023-04-03.txt.gz -p /projects/kumar-lab/sabnig/GWAS/pheno_vame_12k_2023-04-03.txt -n 37 -a /projects/kumar-lab/sabnig/GWAS/anno_vame_12k_2023-04-03.txt -lmm -k /projects/kumar-lab/sabnig/GWAS/output/kinship_mat.cXX.txt -c /projects/kumar-lab/sabnig/GWAS/covar_vame_12k_2023-04-03.txt -o vame_12k_heritability_37 -w 1000 -s 10000 -seed 1 
+##
+## Date = Wed Jul 12 13:20:25 2023
+##
+## Summary Statistics:
+## number of total individuals = 353
+## number of analyzed individuals = 347
+## number of covariates = 2
+## number of phenotypes = 1
+## number of total SNPs/var = 211895
+## number of analyzed SNPs/var = 211895
+## REMLE log-likelihood in the null model = -428.983
+## MLE log-likelihood in the null model = -430.747
+## pve estimate in the null model = 0.334947
+## se(pve) in the null model = 0.0739534
+## vg estimate in the null model = 0.407797
+## ve estimate in the null model = 0.604607
+## beta estimate in the null model =   0.0324458  -0.795278
+## se(beta) =   0.0111696  0.281242
+##
+## Computation Time:
+## total computation time = 2.74432 min 
+## computation time break down: 
+##      time on eigen-decomposition = 0.000435267 min 
+##      time on calculating UtX = 0.0327243 min 
+##      time on optimization = 2.16869 min 
+##
