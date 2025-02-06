@@ -437,7 +437,7 @@ fwrite(b$phenotypes, paste0(args$basedir, "/pheno_", name, ".txt"), row.names = 
 fwrite(b$genotypes, paste0(args$basedir, "/geno_", name, ".txt"), row.names = FALSE, col.names = FALSE, sep = "\t")
 
 #Add covariates
-df_covars <- complete_table[b$indices, c("Weight")]
+df_covars <- complete_table[b$indices, yamin$covar]
 fwrite(df_covars, paste0(args$basedir, "/covars_", name, ".txt"), row.names = FALSE, col.names = FALSE, sep = "\t")
 
 
