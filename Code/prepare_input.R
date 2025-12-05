@@ -331,6 +331,13 @@ if (args$coat_phenotype){
 }
 print(dim(strains_genomes))
 print(dim(phenos))
+
+#Save X matrix for ukinship
+tmp <- strains_genomes[, !c("rs", "major", "minor")] |> as.matrix() |> t()
+#write.csv(tmp, file=paste0(args$basedir, "/X_geno.csv"), quote = FALSE, row.names = FALSE)
+#saveRDS(tmp, file=paste0(args$basedir, "/X_geno.rds"))
+fwrite(as.data.table(tmp), file=paste0(args$basedir, "/X_geno.txt"), row.names = FALSE, col.names = FALSE, sep = "\t")
+
 # Generate a covar table based on the confounding SNPs provided in the yaml file
 snpcovar <- NULL
 if (!is.null(yamin$confSNPs)){
@@ -355,7 +362,7 @@ if (length(covar_names) > 0){
 
 # scale to have mean=0 var=1 if there are more than 2 values (0,1)
 phenos <- data.frame(phenos)
-df_tmp <- phenos[, -which(names(phenos) %in% c(pheno_names))]
+#df_tmp <- phenos[, -which(names(phenos) %in% c(pheno_names))]
 phenos <- data.table(phenos[, -which(names(phenos) %in% c("Strain", "MouseID"))])
 raw_phenos <- phenos
 if (!all(is.na(phenos) | phenos==0 | phenos==1)){
@@ -402,7 +409,7 @@ write.csv(colnames(b$phenotypes), file=paste0(args$basedir, "/phenotypes_order.t
 #}
 
 # Remove SNPs with more than 5% missing data and 5% MAF
-mafc <- rowSums(complete.geno[,-1:-5])/(2*(ncol(complete.geno)-5))
+mafc <- rowSums(complete.geno[,!c("chr", "bp38", "rs", "major", "minor")])/(2*(ncol(complete.geno)-5))
 b$genotypes <- b$genotypes[rowSums(is.na(b$genotypes))<=(ncol(b$genotypes)-3)*args$missing & mafc >= args$MAF & mafc <= 1-args$MAF,]
 
 complete.geno <- complete.geno[rs %in% b$genotypes$rs,]
