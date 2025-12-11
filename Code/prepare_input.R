@@ -412,6 +412,13 @@ write.csv(colnames(b$phenotypes), file=paste0(args$basedir, "/phenotypes_order.t
 mafc <- rowSums(complete.geno[,!c("chr", "bp38", "rs", "major", "minor")])/(2*(ncol(complete.geno)-5))
 b$genotypes <- b$genotypes[rowSums(is.na(b$genotypes))<=(ncol(b$genotypes)-3)*args$missing & mafc >= args$MAF & mafc <= 1-args$MAF,]
 
+# Remove SNPs that contain 0.5 values (heterozygous calls in inbred strains?)
+# Extract rs identifiers for rows containing 0.5 in any genotype column
+rs_with_0.5 <- b$genotypes[rowSums(b$genotypes[, !c("rs", "major", "minor")] == 0.5, na.rm = TRUE) > 0, rs]
+# Filter out these SNPs from b$genotypes
+b$genotypes <- b$genotypes[!rs %in% rs_with_0.5]
+
+# Update complete.geno to match the filtered b$genotypes (removes 0.5 SNPs and filtered SNPs)
 complete.geno <- complete.geno[rs %in% b$genotypes$rs,]
 fwrite(complete.geno, file = paste0(args$basedir, "/strains_genotypes_all.csv"))
 
