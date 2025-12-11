@@ -450,6 +450,7 @@ fwrite(b$genotypes, paste0(args$basedir, "/geno_", name, ".txt"), row.names = FA
 
 #Add covariates
 df_covars <- complete_table[b$indices, yamin$covar]
+df_covars <- df_covars |> mutate(Sex = ifelse(Sex == "M", 0, 1))
 fwrite(df_covars, paste0(args$basedir, "/covars_", name, ".txt"), row.names = FALSE, col.names = FALSE, sep = "\t")
 
 
